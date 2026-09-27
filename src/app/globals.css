@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+/* ── Design Tokens ── */
+:root {
+  --paper:      #EDEAE1;
+  --paper-card: #FAF8F2;
+  --ink:        #1D2420;
+  --ink-soft:   #4B534D;
+  --pine:       #234B3E;
+  --pine-dark:  #193630;
+  --brass:      #A67C33;
+  --line:       #CFC9BA;
+
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body:    'IBM Plex Sans', sans-serif;
+  --font-mono:    'IBM Plex Mono', monospace;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-family: var(--font-body); }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection { background: #234B3E30; }
+
+/* ── Custom scrollbar ── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--paper); }
+::-webkit-scrollbar-thumb { background: var(--line); border-radius: 2px; }
+
+/* ── Focus ring for accessibility ── */
+:focus-visible { outline: 2px solid var(--pine); outline-offset: 2px; }
+
+/* ── Typography ── */
+.font-display { font-family: var(--font-display); }
+.font-body    { font-family: var(--font-body); }
+.font-mono    { font-family: var(--font-mono); }
+
+/* ── Layout ── */
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+.section     { padding: 5rem 0; }
+.section-sm  { padding: 3rem 0; }
+
+/* ── Ruled paper line pattern (for decorative use) ── */
+.ruled-lines {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 27px,
+    var(--line) 27px,
+    var(--line) 28px
+  );
+}
+
+/* ── Blueprint dot grid ── */
+.bp-grid {
+  background-image: radial-gradient(circle, var(--line) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ── Hairline divider ── */
+.hairline      { border-top: 1px solid var(--line); }
+.hairline-v    { border-left: 1px solid var(--line); }
+
+/* ── Buttons ── */
+.btn-pine {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.5rem;
+  background: var(--pine);
+  color: var(--paper-card);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: 1px solid var(--pine);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+  letter-spacing: -0.01em;
+}
+.btn-pine:hover { background: var(--pine-dark); border-color: var(--pine-dark); }
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.5rem;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 0.15s ease, color 0.15s ease;
+  letter-spacing: -0.01em;
+}
+.btn-outline:hover { border-color: var(--pine); color: var(--pine); }
+
+/* ── Mono label ── */
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.02em;
+}
+.mono-label-pine {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--pine);
+  letter-spacing: 0.02em;
+}
+.mono-label-brass {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--brass);
+  letter-spacing: 0.02em;
+}
+
+/* ── Card ── */
+.card {
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  transition: border-color 0.15s ease;
+}
+.card:hover { border-color: var(--ink-soft); }
+
+/* ── Section header marker ── */
+.section-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.section-kicker::before {
+  content: '';
+  display: inline-block;
+  width: 1.5rem;
+  height: 1px;
+  background: var(--line);
+}
+
+/* ── WhatsApp float ── */
+.wa-float {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  z-index: 100;
+  width: 3rem;
+  height: 3rem;
+  background: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  text-decoration: none;
+}
+.wa-float:hover { background: #1ebe57; }
+
+/* ── Browser window mockup frame ── */
+.browser-frame {
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.browser-bar {
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  padding: 0.4rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.browser-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--line);
+}
+
+/* ── Wordmark separator ── */
+.wordmark-sep {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-decoration: none;
+}
+.wordmark-sep span { color: var(--ink-soft); }
+
+/* Navbar link hover underline */
+.nav-link {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+  text-decoration: none;
+  padding-bottom: 1px;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+.nav-link:hover, .nav-link.active { color: var(--ink); border-color: var(--ink); }
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .section { padding: 3.5rem 0; }
+}
