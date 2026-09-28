@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Incode Solution — Solusi Teknologi Terpadu Akademik & Bisnis',
+  title: 'Incode Solution',
   description:
     'Jasa teknologi profesional: pengerjaan tugas, skripsi, debugging kode, pembuatan website company profile, landing page penjualan, dan sistem kasir UMKM. Konsultasi gratis via WhatsApp.',
   keywords: [

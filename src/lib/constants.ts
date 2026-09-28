@@ -18,5 +18,6 @@ export const NAV_LINKS = [
   { label: 'Layanan', href: '#layanan' },
   { label: 'Keunggulan', href: '#keunggulan' },
   { label: 'Portofolio', href: '#portofolio' },
+  { label: 'Testimoni', href: '#testimoni' },
   { label: 'Kontak', href: '#kontak' },
 ];

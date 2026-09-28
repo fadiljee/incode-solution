@@ -26,15 +26,14 @@ import {
   getLocalStore,
   setLocalStore,
 } from './data-store';
-
+ 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
 export const isSupabaseConfigured =
   Boolean(supabaseUrl) &&
   Boolean(supabaseAnonKey) &&
-  supabaseUrl !== 'your-supabase-url' &&
-  !supabaseUrl.includes('your-supabase');
+  supabaseUrl.startsWith('http');
 
 export const supabase = isSupabaseConfigured
   ? createClient(supabaseUrl, supabaseAnonKey)
