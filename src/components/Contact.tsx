@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { buildWaLink } from '@/lib/constants';
 import { Send, CheckCircle, Loader2 } from 'lucide-react';
+import { createLead } from '@/lib/supabase';
 import type { ContactMessage } from '@/lib/supabase';
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
@@ -24,15 +25,14 @@ export default function Contact() {
     setStatus('loading');
     setErrorMsg('');
     try {
-      const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-      const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-      if (url && key && url !== 'your-supabase-url') {
-        const { supabase } = await import('@/lib/supabase');
-        const { error } = await supabase.from('contacts').insert([
-          { name: form.name, email: form.email, message: form.message, segment: form.segment },
-        ]);
-        if (error) throw error;
-      }
+      await createLead({
+        name: form.name,
+        email: form.email,
+        message: form.message,
+        category: form.segment,
+        subject: `Konsultasi ${form.segment}`,
+        source: 'contact_form',
+      });
       setStatus('success');
       setForm({ name: '', email: '', message: '', segment: 'umum' });
     } catch (err: unknown) {

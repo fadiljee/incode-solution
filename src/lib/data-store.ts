@@ -1,0 +1,312 @@
+import type {
+  ServiceItem,
+  PortfolioItem,
+  TestimonialItem,
+  LeadItem,
+  ActivityLogItem,
+  Profile,
+} from './types';
+
+export const DEFAULT_SERVICES: ServiceItem[] = [
+  {
+    id: 'srv-1',
+    name: 'Pengerjaan Tugas Informatika',
+    slug: 'pengerjaan-tugas-informatika',
+    category: 'akademik',
+    short_description: 'Bantuan pengerjaan tugas pemrograman, algoritma, database, & web.',
+    description: 'Solusi pengerjaan tugas akademik secara terstruktur, rapi, dan dilengkapi penjelasan agar mudah dipahami saat bimbingan atau ujian.',
+    icon: 'Code',
+    price_from: 50000,
+    cta_message: 'Halo Incode Solution! Saya ingin berkonsultasi mengenai bantuan tugas pemrograman.',
+    sort_order: 1,
+    is_published: true,
+    created_at: '2026-09-01T00:00:00Z',
+  },
+  {
+    id: 'srv-2',
+    name: 'Bantuan Skripsi & Project Akhir',
+    slug: 'bantuan-skripsi-project-akhir',
+    category: 'akademik',
+    short_description: 'Pendampingan & pengerjaan aplikasi skripsi/ta untuk mahasiswa.',
+    description: 'Pengembangan sistem skripsi lengkap dengan source code, modul penjelasan, dan siap dipresentasikan.',
+    icon: 'GraduationCap',
+    price_from: 500000,
+    cta_message: 'Halo Incode Solution! Saya mahasiswa yang butuh pendampingan pembuatan sistem skripsi.',
+    sort_order: 2,
+    is_published: true,
+    created_at: '2026-09-02T00:00:00Z',
+  },
+  {
+    id: 'srv-3',
+    name: 'Jasa Debugging & Fix Bug Kode',
+    slug: 'jasa-debugging-fix-bug-kode',
+    category: 'akademik',
+    short_description: 'Perbaikan error kode, refactoring, dan troubleshooting program.',
+    description: 'Mengatasi masalah error, bug, dan optimasi performa program dalam waktu cepat.',
+    icon: 'Bug',
+    price_from: 35000,
+    cta_message: 'Halo Incode Solution! Saya mengalami error pada program saya, mohon bantuan debugging.',
+    sort_order: 3,
+    is_published: true,
+    created_at: '2026-09-03T00:00:00Z',
+  },
+  {
+    id: 'srv-4',
+    name: 'Company Profile Profesional',
+    slug: 'company-profile-profesional',
+    category: 'bisnis',
+    short_description: 'Website company profile modern, fast-loading, dan SEO-friendly.',
+    description: 'Membangun citra kredibel perusahaan Anda di internet dengan desain editorial yang elegan dan responsive.',
+    icon: 'Globe',
+    price_from: 750000,
+    cta_message: 'Halo Incode Solution! Saya tertarik membuat website Company Profile untuk perusahaan saya.',
+    sort_order: 4,
+    is_published: true,
+    created_at: '2026-09-04T00:00:00Z',
+  },
+  {
+    id: 'srv-5',
+    name: 'Landing Page Penjualan',
+    slug: 'landing-page-penjualan',
+    category: 'bisnis',
+    short_description: 'Landing page tinggi konversi terintegrasi WhatsApp & analytics.',
+    description: 'Desain landing page interaktif yang mempercepat penjualan produk dan jasa bisnis Anda.',
+    icon: 'Zap',
+    price_from: 500000,
+    cta_message: 'Halo Incode Solution! Saya ingin membuat landing page penjualan produk.',
+    sort_order: 5,
+    is_published: true,
+    created_at: '2026-09-05T00:00:00Z',
+  },
+  {
+    id: 'srv-6',
+    name: 'Sistem Kasir & Aplikasi Internal',
+    slug: 'sistem-kasir-aplikasi-internal',
+    category: 'bisnis',
+    short_description: 'Sistem POS kasir, manajemen inventory, dan dashboard internal.',
+    description: 'Sistem manajemen operasional bisnis berbasis web/cloud untuk mengotomatisasi pencatatan usaha Anda.',
+    icon: 'LayoutDashboard',
+    price_from: 1200000,
+    cta_message: 'Halo Incode Solution! Saya ingin berkonsultasi mengenai pembuatan aplikasi kasir/sistem bisnis.',
+    sort_order: 6,
+    is_published: true,
+    created_at: '2026-09-06T00:00:00Z',
+  },
+];
+
+export const DEFAULT_PORTFOLIOS: PortfolioItem[] = [
+  {
+    id: 'port-1',
+    title: 'Sistem Informasi Perpustakaan Web',
+    slug: 'sistem-informasi-perpustakaan-web',
+    description: 'Sistem pengelolaan sirkulasi buku perpustakaan lengkap dengan scanner barcode dan laporan otomatis.',
+    category: 'akademik',
+    client_name: 'Tugas Akhir Mahasiswa',
+    project_year: 2024,
+    technologies: ['PHP', 'MySQL', 'Bootstrap'],
+    demo_url: '#',
+    is_featured: true,
+    is_published: true,
+    created_at: '2024-01-01T00:00:00Z',
+  },
+  {
+    id: 'port-2',
+    title: 'Landing Page Toko Online UMKM',
+    slug: 'landing-page-toko-online-umkm',
+    description: 'Halaman landing page showcase produk busana lokal terintegrasi checkout langsung ke WhatsApp.',
+    category: 'bisnis',
+    client_name: 'Koleksi Busana Nusantara',
+    project_year: 2024,
+    technologies: ['Next.js', 'Tailwind CSS', 'Framer Motion'],
+    demo_url: '#',
+    is_featured: true,
+    is_published: true,
+    created_at: '2024-02-01T00:00:00Z',
+  },
+  {
+    id: 'port-3',
+    title: 'Aplikasi Kasir Digital Resto',
+    slug: 'aplikasi-kasir-digital-resto',
+    description: 'Point of Sales (POS) berbasis PWA dengan fitur cetak struk thermal dan rekap omset harian.',
+    category: 'system',
+    client_name: 'Resto Sedap Rasa',
+    project_year: 2024,
+    technologies: ['React', 'Supabase', 'PWA'],
+    demo_url: '#',
+    is_featured: false,
+    is_published: true,
+    created_at: '2024-03-01T00:00:00Z',
+  },
+  {
+    id: 'port-4',
+    title: 'Klasifikasi Sentimen NLP Ulasan Produk',
+    slug: 'klasifikasi-sentimen-nlp-ulasan-produk',
+    description: 'Model Deep Learning LSTM untuk analisis sentimen ulasan pembeli e-commerce.',
+    category: 'akademik',
+    client_name: 'Penelitian Tugas Akhir',
+    project_year: 2024,
+    technologies: ['Python', 'TensorFlow', 'Jupyter'],
+    demo_url: '#',
+    is_featured: false,
+    is_published: true,
+    created_at: '2024-04-01T00:00:00Z',
+  },
+  {
+    id: 'port-5',
+    title: 'Company Profile PT Kontraktor Utama',
+    slug: 'company-profile-pt-kontraktor-utama',
+    description: 'Website company profile untuk perusahaan konstruksi nasional dengan galeri proyek interaktif.',
+    category: 'website',
+    client_name: 'PT Kontraktor Utama',
+    project_year: 2024,
+    technologies: ['Next.js', 'TypeScript', 'Tailwind'],
+    demo_url: '#',
+    is_featured: true,
+    is_published: true,
+    created_at: '2024-05-01T00:00:00Z',
+  },
+  {
+    id: 'port-6',
+    title: 'Dashboard IoT Monitoring Suhu Realtime',
+    slug: 'dashboard-iot-monitoring-suhu-realtime',
+    description: 'Sistem telemetry IoT pemantauan lingkungan green house berbasis protokol MQTT.',
+    category: 'system',
+    client_name: 'Lab Agroteknologi',
+    project_year: 2024,
+    technologies: ['React', 'Node.js', 'MQTT', 'Chart.js'],
+    demo_url: '#',
+    is_featured: false,
+    is_published: true,
+    created_at: '2024-06-01T00:00:00Z',
+  },
+];
+
+export const DEFAULT_TESTIMONIALS: TestimonialItem[] = [
+  {
+    id: 'test-1',
+    name: 'Ahmad Fauzi',
+    position: 'Mahasiswa Teknik Informatika',
+    company: 'Universitas Negeri',
+    content: 'Pengerjaan tugas akhir saya sangat terbantu, kodenya rapi dan dijelaskan dengan teliti sampai paham saat sidang!',
+    rating: 5,
+    category: 'akademik',
+    is_published: true,
+    created_at: '2026-09-10T00:00:00Z',
+  },
+  {
+    id: 'test-2',
+    name: 'Budi Santoso',
+    position: 'Owner',
+    company: 'Kopi Sedap Nusantara',
+    content: 'Website landing page kami jadi sangat profesional. Leads WhatsApp meningkat 200% dalam bulan pertama.',
+    rating: 5,
+    category: 'bisnis',
+    is_published: true,
+    created_at: '2026-09-12T00:00:00Z',
+  },
+  {
+    id: 'test-3',
+    name: 'Sinta Maharani',
+    position: 'Founder',
+    company: 'Batik Elegant',
+    content: 'Respon Incode Solution cepat banget, pengerjaan website company profile selesai lebih cepat dari estimasi.',
+    rating: 5,
+    category: 'bisnis',
+    is_published: true,
+    created_at: '2026-09-15T00:00:00Z',
+  },
+];
+
+export const DEFAULT_LEADS: LeadItem[] = [
+  {
+    id: 'lead-1',
+    name: 'Dewi Rahmawati',
+    email: 'dewi@gmail.com',
+    phone: '081298765432',
+    category: 'bisnis',
+    subject: 'Pembuatan Website UMKM',
+    message: 'Halo, saya butuh website landing page untuk katalog fashion batik saya.',
+    status: 'NEW',
+    source: 'contact_form',
+    created_at: '2026-09-27T08:30:00Z',
+  },
+  {
+    id: 'lead-2',
+    name: 'Rian Hidayat',
+    email: 'rian.h@student.ac.id',
+    phone: '085712348899',
+    category: 'akademik',
+    subject: 'Bantuan System Skripsi Web',
+    message: 'Saya butuh bantuan pengerjaan sistem rekomendasi berbasis web untuk skripsi.',
+    status: 'CONTACTED',
+    notes: 'Sudah dihubungi via WA, kesepakatan scope minggu ini.',
+    source: 'whatsapp_hero',
+    created_at: '2026-09-26T14:20:00Z',
+  },
+  {
+    id: 'lead-3',
+    name: 'PT Mulia Jaya',
+    email: 'info@muliajaya.co.id',
+    phone: '0217890123',
+    category: 'bisnis',
+    subject: 'Aplikasi Internal Stock & POS',
+    message: 'Ingin konsultasi sistem inventory & kasir multi-cabang.',
+    status: 'WON',
+    notes: 'Project senilai Rp 12.000.000, tahap kesepakatan DP.',
+    source: 'services_page',
+    created_at: '2026-09-20T10:00:00Z',
+  },
+];
+
+export const DEFAULT_LOGS: ActivityLogItem[] = [
+  {
+    id: 'log-1',
+    user_email: 'admin@incodesolution.id',
+    action: 'CREATE',
+    resource: 'Portfolio',
+    resource_id: 'port-5',
+    metadata: { title: 'Company Profile PT Kontraktor Utama' },
+    created_at: '2026-09-28T07:15:00Z',
+  },
+  {
+    id: 'log-2',
+    user_email: 'admin@incodesolution.id',
+    action: 'UPDATE_STATUS',
+    resource: 'Lead',
+    resource_id: 'lead-3',
+    metadata: { new_status: 'WON' },
+    created_at: '2026-09-27T16:45:00Z',
+  },
+];
+
+export const DEFAULT_PROFILES: Profile[] = [
+  {
+    id: 'usr-1',
+    full_name: 'Fadil (Administrator)',
+    email: 'admin@incodesolution.id',
+    role: 'SUPER_ADMIN',
+    status: 'ACTIVE',
+    created_at: '2026-09-01T00:00:00Z',
+    updated_at: '2026-09-28T00:00:00Z',
+  },
+];
+
+// Helper functions to get and update stored state safely
+export function getLocalStore<T>(key: string, fallback: T): T {
+  if (typeof window === 'undefined') return fallback;
+  try {
+    const raw = localStorage.getItem(`incode_${key}`);
+    return raw ? JSON.parse(raw) : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+export function setLocalStore<T>(key: string, value: T): void {
+  if (typeof window === 'undefined') return;
+  try {
+    localStorage.setItem(`incode_${key}`, JSON.stringify(value));
+  } catch {
+    // Ignore quota errors
+  }
+}

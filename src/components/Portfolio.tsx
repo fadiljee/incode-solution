@@ -5,59 +5,71 @@ import type { PortfolioItem } from '@/lib/supabase';
 
 const STATIC_PORTFOLIO: PortfolioItem[] = [
   {
-    id: 1,
+    id: '1',
     title: 'Sistem Informasi Perpustakaan',
+    slug: 'sistem-informasi-perpustakaan',
     category: 'akademik',
     description: 'Manajemen peminjaman & pengembalian buku berbasis web.',
-    image_url: '',
-    tech_stack: ['PHP', 'MySQL', 'Bootstrap'],
+    technologies: ['PHP', 'MySQL', 'Bootstrap'],
+    is_featured: true,
+    is_published: true,
     created_at: '2024-01-01',
   },
   {
-    id: 2,
+    id: '2',
     title: 'Landing Page Toko Online',
+    slug: 'landing-page-toko-online',
     category: 'bisnis',
     description: 'Halaman penjualan produk UMKM dengan checkout via WhatsApp.',
-    image_url: '',
-    tech_stack: ['Next.js', 'Tailwind', 'Vercel'],
-    live_url: '#',
+    technologies: ['Next.js', 'Tailwind', 'Vercel'],
+    demo_url: '#',
+    is_featured: true,
+    is_published: true,
     created_at: '2024-02-01',
   },
   {
-    id: 3,
+    id: '3',
     title: 'Aplikasi Kasir Digital',
+    slug: 'aplikasi-kasir-digital',
     category: 'bisnis',
     description: 'Sistem POS ringan untuk warung makan dengan laporan harian.',
-    image_url: '',
-    tech_stack: ['React', 'Supabase', 'PWA'],
+    technologies: ['React', 'Supabase', 'PWA'],
+    is_featured: false,
+    is_published: true,
     created_at: '2024-03-01',
   },
   {
-    id: 4,
+    id: '4',
     title: 'Klasifikasi Sentimen NLP',
+    slug: 'klasifikasi-sentimen-nlp',
     category: 'akademik',
     description: 'Skripsi: LSTM untuk sentimen ulasan produk e-commerce.',
-    image_url: '',
-    tech_stack: ['Python', 'TensorFlow', 'Jupyter'],
+    technologies: ['Python', 'TensorFlow', 'Jupyter'],
+    is_featured: false,
+    is_published: true,
     created_at: '2024-04-01',
   },
   {
-    id: 5,
+    id: '5',
     title: 'Company Profile PT Maju Jaya',
+    slug: 'company-profile-pt-maju-jaya',
     category: 'bisnis',
     description: 'Website company profile untuk perusahaan konstruksi.',
-    image_url: '',
-    tech_stack: ['Next.js', 'Framer Motion', 'Vercel'],
-    live_url: '#',
+    technologies: ['Next.js', 'Framer Motion', 'Vercel'],
+    demo_url: '#',
+    is_featured: true,
+    is_published: true,
     created_at: '2024-05-01',
   },
   {
-    id: 6,
+    id: '6',
     title: 'Dashboard IoT Monitoring',
+    slug: 'dashboard-iot-monitoring',
     category: 'akademik',
     description: 'Monitoring sensor suhu & kelembaban real-time via MQTT.',
-    image_url: '',
-    tech_stack: ['React', 'Node.js', 'MQTT'],
+    technologies: ['React', 'Node.js', 'MQTT'],
+    is_featured: false,
+    is_published: true,
     created_at: '2024-06-01',
   },
 ];
@@ -65,7 +77,7 @@ const STATIC_PORTFOLIO: PortfolioItem[] = [
 type Filter = 'all' | 'akademik' | 'bisnis';
 
 /* CSS ruled-lines placeholder that mimics the wireframe sketch */
-function BrowserMockup({ category }: { category: 'akademik' | 'bisnis' }) {
+function BrowserMockup({ category }: { category: string }) {
   return (
     <div className="browser-frame" style={{ background: 'var(--paper-card)' }}>
       {/* Browser bar */}
@@ -108,9 +120,9 @@ function PortfolioCard({ item }: { item: PortfolioItem }) {
           >
             {item.category}
           </span>
-          {item.live_url && (
+          {item.demo_url && (
             <a
-              href={item.live_url}
+              href={item.demo_url}
               target="_blank"
               rel="noopener noreferrer"
               style={{ color: 'var(--ink-soft)', display: 'flex', alignItems: 'center' }}
@@ -134,7 +146,7 @@ function PortfolioCard({ item }: { item: PortfolioItem }) {
 
         {/* Tech stack */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', paddingTop: '0.5rem', borderTop: '1px solid var(--line)' }}>
-          {item.tech_stack.map((t) => (
+          {(item.technologies || []).map((t: string) => (
             <span key={t} className="mono-label" style={{ fontSize: '0.68rem' }}>{t}</span>
           ))}
         </div>
@@ -144,20 +156,13 @@ function PortfolioCard({ item }: { item: PortfolioItem }) {
 }
 
 export default function Portfolio() {
-  const [items, setItems] = useState<PortfolioItem[]>(STATIC_PORTFOLIO);
+  const [items, setItems] = useState<PortfolioItem[]>(STATIC_PORTFOLIO as PortfolioItem[]);
   const [filter, setFilter] = useState<Filter>('all');
 
   useEffect(() => {
-    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-    if (!url || !key || url === 'your-supabase-url') return;
-
-    import('@/lib/supabase').then(async ({ supabase }) => {
-      const { data } = await supabase
-        .from('portfolio')
-        .select('*')
-        .order('created_at', { ascending: false });
-      if (data && data.length > 0) setItems(data as PortfolioItem[]);
+    import('@/lib/supabase').then(async ({ getPortfolios }) => {
+      const data = await getPortfolios();
+      if (data && data.length > 0) setItems(data);
     });
   }, []);
 
